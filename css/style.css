@@ -1,0 +1,113 @@
+/* Universal Box-Sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 1.75em; /* 75% larger than base text */
+    color: #333;
+}
+
+/* Row Container */
+.row {
+    margin: 0 20px; /* Horizontal spacing from browser edges */
+    /* Using Flexbox for layout */
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 20px; /* Space between columns */
+    justify-content: center; /* Center columns when they don't fill the row */
+}
+
+/* Base Column Styles (for all views) */
+/* Apply common styles to all column classes to avoid repetition */
+.col-lg-4, .col-md-6, .col-md-12, .col-sm-12 {
+    border: 1px solid black; /* 1px black border */
+    background-color: #e0e0e0; /* Default background color for sections */
+    position: relative; /* Crucial for absolute positioning of section-title */
+    padding: 15px; /* Padding inside the section content area */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    /* Flexbox 'flex' property will be defined in media queries */
+}
+
+/* Section Title Styling */
+.section-title {
+    position: absolute;
+    top: -1px; /* Adjust to sit perfectly on the border */
+    right: -1px; /* Adjust to sit perfectly on the border */
+    margin: 0; /* Remove default heading margins */
+    padding: 8px 15px;
+    font-size: 1.25em; /* 25% larger than base text */
+    color: white;
+    border: 1px solid black; /* 1px black border for title region */
+    border-top-right-radius: 5px; /* Match parent's border radius if desired */
+    border-bottom-left-radius: 5px; /* A common design for top-right labels */
+    z-index: 1; /* Ensure it's above the paragraph if it had a background */
+}
+
+/* Unique background colors for section titles */
+.section-title.chicken {
+    background-color: #ffcccc; /* Light red */
+}
+
+.section-title.beef {
+    background-color: #ccffcc; /* Light green */
+}
+
+.section-title.sushi {
+    background-color: #ccccff; /* Light blue */
+}
+
+/* Paragraph Text Styling */
+.section-content p {
+    /* PUSH DOWN the text to avoid overlap with the absolutely positioned title */
+    margin-top: 45px; /* Adjust this value based on the height of your .section-title */
+    line-height: 1.6;
+    color: #555;
+    background-color: #f0f0f0; /* Lighter background for text area */
+    padding: 10px; /* Padding for the text itself within the section */
+    border-radius: 3px;
+    min-height: 100px; /* Ensure some consistent height */
+}
+
+
+/* --- DESKTOP VIEW (>= 992px) --- */
+@media (min-width: 992px) {
+    .col-lg-4 {
+        flex: 1 1 calc(33.33% - 20px); /* 3 equal columns, accounting for gap */
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+/* --- TABLET VIEW (768px to 991px) --- */
+@media (min-width: 768px) and (max-width: 991px) {
+    .col-md-6 {
+        flex: 1 1 calc(50% - 20px); /* First 2 columns, 50% each */
+        max-width: calc(50% - 20px);
+    }
+
+    .col-md-12 {
+        flex: 1 1 100%; /* Third column (Sushi), 100% width */
+        max-width: 100%;
+    }
+}
+
+/* --- MOBILE VIEW (<= 767px) --- */
+@media (max-width: 767px) {
+    .col-sm-12 {
+        flex: 1 1 100%; /* All columns take 100% width */
+        max-width: 100%;
+    }
+    .row {
+        gap: 15px; /* Slightly less gap for mobile */
+    }
+}
